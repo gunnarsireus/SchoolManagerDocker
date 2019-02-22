@@ -4,9 +4,8 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
-    <UserSecretsId>e5ec0109-61fb-42a5-9c46-c9d0f8ee6536</UserSecretsId>
+    <UserSecretsId>19ac0ea0-252b-4765-913a-544daaac030d</UserSecretsId>
   </PropertyGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
