@@ -1,27 +1,29 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Api.DAL;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
-using Api.DAL;
 
 namespace Api
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApiContext>(options =>
-                options.UseSqlite("DataSource=App_Data/School.db"));
+                options.UseSqlite("Data Source=App_Data/School.db"));
 
             services.AddMvc();
 
-            // Register the Swagger generator, defining one or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "Api", Version = "v1" });
-            });
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -40,18 +42,7 @@ namespace Api
                 app.UseDeveloperExceptionPage();
             }
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api V1");
-            });
-
             app.UseMvc();
-
-            app.UseCors("AllowAllOrigins");
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {

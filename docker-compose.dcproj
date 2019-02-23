@@ -3,9 +3,9 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>3f03047a-e843-47bf-9f28-6627fc64a816</ProjectGuid>
+    <ProjectGuid>52b1174a-bce9-4ecd-a078-e8ffc73f58bb</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>http://localhost:{ServicePort}</DockerServiceUrl>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>client</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

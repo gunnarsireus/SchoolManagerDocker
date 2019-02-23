@@ -17,7 +17,7 @@ function timerJob() {
     const tenSeconds = 10000;
     const oneSecond = 1000;
     $.ajax({
-        url: "http://localhost:54411/api/student",
+        url: "http://localhost:54419/api/student",
         type: "GET",
         dataType: "json",
         success: function (students) {
@@ -34,7 +34,7 @@ function timerJob() {
             }
             selectedStudent.present = !selectedStudent.present;
             $.ajax({
-                url: 'http://localhost:54411/api/student/' + selectedStudent.id,
+                url: 'http://localhost:54419/api/student/' + selectedStudent.id,
                 contentType: "application/json",
                 type: "PUT",
                 data: JSON.stringify(selectedStudent),

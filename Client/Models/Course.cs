@@ -9,7 +9,7 @@ namespace Client.Models
 	{
 		public Course()
 		{
-			CreationTime = DateTime.Now.ToString(new CultureInfo("en-US"));
+			CreationTime = DateTime.Now.ToString(new CultureInfo("se-SE"));
 		}
 		public Guid Id { get; set; }
 
