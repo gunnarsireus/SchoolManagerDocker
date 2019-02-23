@@ -37,9 +37,8 @@
     </dl>
 </div>
 <div>
-    @{var listString = "Index/" + Model.CourseId; }
     <p>
         <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-        <a asp-action="@listString">Back to list</a>
+        <a asp-action="Index" asp-route-id="@Model.CourseId">Back to list</a>
     </p>
 </div>
