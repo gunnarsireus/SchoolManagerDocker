@@ -1,0 +1,86 @@
+@using System.Security.Principal
+@model Client.Models.StudentViewModel.StudentListViewModel
+@{
+    ViewData["Title"] = "Course Students";
+}
+<h2>Students in Courses</h2>
+
+<script type="text/javascript">
+    function ShowStudents() {
+        window.location = "/Student/Index/" + $('#StudentsForCourse').val();
+    }
+</script>
+@{
+    if (ViewBag.CourseId != null)
+    {
+        <table>
+            <tr class="page-header"><bold>Select course:</bold></tr>
+            <tr>
+                <td>
+                    @Html.DropDownList("StudentsForCourse", Model.CourseSelectList, new { onchange = "ShowStudents()" })
+                </td>
+            </tr>
+        </table>
+        <p>
+            <a asp-action="Create" asp-route-id="@ViewBag.CourseId">Add new Student</a>
+        </p>
+    }
+    else
+    {
+        <p>No course found</p>
+    }
+}
+<div class="row">
+    <div class="col-lg-8">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Students[0].FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Students[0].LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Students[0].CreationTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Students[0].Present)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Students)
+                {
+                    var iidd = item.Id + "_2";
+
+                    <tr id="@iidd">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreationTime)
+                        </td>
+                        @{ var cl = item.Present ? "" : "alert-danger";}
+                        <td class="@cl">
+                            @Html.DisplayFor(modelItem => item.PresentOrAbsent)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Remove</a>
+                        </td>
+                    </tr>  }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-4">
+        <p class="alert-info">All students for a particular course are shown here. In the drop-down menu, you can choose another course and see its students. Note how the status changes randomly every 10 seconds.
+            <br/><br/>
+            If you press F12 and select "Console" you can see when the status changes for each student using Javascript in the browser<br /><br />If you press F12 and select "Console" you can see when the status changes for each student using Javascript in the browser.</p>
+    </div>
+</div>

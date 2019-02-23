@@ -1,0 +1,45 @@
+@model Student
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details for student in course @ViewBag.CourseName</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreationTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Present)
+        </dt>
+        @{ var iidd = Model.Id + "_3"; var cl = Model.Present ? "" : "alert-danger";}
+        <dd id="@iidd" class="@cl" style="max-width: 50px;">
+            @Html.DisplayFor(model => model.PresentOrAbsent)
+        </dd>
+    </dl>
+</div>
+<div>
+    @{var listString = "Index/" + Model.CourseId; }
+    <p>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="@listString">Back to list</a>
+    </p>
+</div>
