@@ -20,7 +20,7 @@ namespace Client.Controllers
 			}
 			catch (Exception e)
 			{
-				TempData["CustomError"] = "No contact with server! Api must be started before Client can run!";
+				TempData["CustomError"] = "Api must be start before Client. Please reload page!";
 				return View(new HomeViewModel { Courses = new List<Course>()});
 			}
 
