@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Client.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Client.Models;
-using Client.Models.HomeViewModel;
 using Client.Services;
 
 namespace Client
@@ -37,35 +32,12 @@ namespace Client
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddMvc();
 
-            var task = ConfigureServicesAsync(services);
-
-            task.Wait();
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite("Data Source=" + Directory.GetCurrentDirectory() + "/App_Data/AspNet.db"));
 
 
         }
-        public async Task ConfigureServicesAsync(IServiceCollection services)
-        {
-            string aspNetDb = null;
-            var aspNetDbLocation = new AspNetDbLocation();
-            try
-            {
-                aspNetDb = await aspNetDbLocation.GetAspNetDbAsync();
-            }
-            catch (Exception e)
-            {
-                //Do nothing
-            }
-            if (aspNetDb != null)
-            {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlite("Data Source=" + aspNetDb));
-            }
-            else
-            {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlite("Data Source=" + Directory.GetCurrentDirectory() + "\\App_Data\\AspNet.db"));
-            }
-        }
+ 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

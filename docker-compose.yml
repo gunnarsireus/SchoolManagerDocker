@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  api:
+    image: ${DOCKER_REGISTRY-}api
+    ports:
+      - 54411:80
+    build:
+      context: .
+      dockerfile: Api/Dockerfile
+
+  client:
+    image: ${DOCKER_REGISTRY-}client
+    environment:
+      - ApiUrl=http://api/
+    build:
+      context: .
+      dockerfile: Client/Dockerfile
+
