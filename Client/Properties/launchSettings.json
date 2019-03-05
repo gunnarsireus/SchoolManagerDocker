@@ -13,14 +13,16 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ApiUrl": "http//localhost:54419/"
+        "ApiUrl": "http//localhost:54419/",
+        "DOCKER_REGISTRY": "gunnarsireus/myrepo"
       }
     },
     "Client": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOCKER_REGISTRY": "gunnarsireus/myrepo"
       },
       "applicationUrl": "http://localhost:50416/"
     }
